@@ -1,0 +1,10 @@
+%% Legacy export source retained for compatibility; canonical content is c4-context.md.
+flowchart LR
+    Student(["Student Learner<br/>[Person]"])
+    Teacher(["Teacher Mentor<br/>[Person]"])
+    System["SynapseSync<br/>[Software System]"]
+    LLM["LLM Provider API<br/>[External Software System]"]
+    Student -->|"HTTPS"| System
+    Teacher -->|"HTTPS"| System
+    System -->|"HTTPS/JSON"| LLM
+    LLM -->|"HTTPS/JSON"| System

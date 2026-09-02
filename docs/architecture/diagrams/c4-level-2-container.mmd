@@ -1,0 +1,20 @@
+flowchart LR
+    Student(["Student Learner<br/>[Person]"])
+    Teacher(["Teacher Mentor<br/>[Person]"])
+
+    subgraph SynapseSync["SynapseSync System Boundary"]
+        direction TB
+        Web["Web Application<br/>[Container: React + Vite]"]
+        API["Backend API<br/>[Container: Python + FastAPI Modular Monolith]"]
+        DB[("Primary Database<br/>[Container: PostgreSQL]")]
+        Store[("Document Store<br/>[Container: S3-compatible Object Storage]")]
+    end
+
+    LLM["LLM Provider API<br/>[External Software System]"]
+    Student -->|"HTTPS"| Web
+    Teacher -->|"HTTPS"| Web
+    Web -->|"HTTPS/JSON REST"| API
+    API -->|"SQL/TCP"| DB
+    API -->|"S3 API/HTTPS"| Store
+    API -->|"HTTPS/JSON"| LLM
+    LLM -->|"HTTPS/JSON"| API

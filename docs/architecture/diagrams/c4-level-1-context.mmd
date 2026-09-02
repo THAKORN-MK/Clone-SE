@@ -1,0 +1,17 @@
+flowchart LR
+    Student(["Student Learner<br/>[Person]<br/>ถามคำถาม ทำแบบฝึกหัด<br/>และติดตามความก้าวหน้า"])
+    Teacher(["Teacher Mentor<br/>[Person]<br/>ดูข้อมูลสรุปของผู้เรียน<br/>ที่ตนได้รับสิทธิ์ดูแล"])
+    System["SynapseSync<br/>[Software System]<br/>ช่วยอธิบายจุดที่ไม่เข้าใจ<br/>สร้างแบบฝึกหัด และบันทึกผล"]
+    LLM["LLM Provider API<br/>[External Software System]<br/>สร้างคำอธิบายและแบบฝึกหัด"]
+
+    Student -->|"เรียนและฝึกผ่าน Web UI<br/>HTTPS"| System
+    Teacher -->|"ดู learning-gap summary<br/>HTTPS"| System
+    System -->|"ส่ง prompt ที่จำเป็น<br/>HTTPS/JSON"| LLM
+    LLM -->|"ส่งผลลัพธ์ AI<br/>HTTPS/JSON"| System
+
+    classDef person fill:#fff7ed,stroke:#f59e0b,color:#1f2937,stroke-width:2px
+    classDef system fill:#eff6ff,stroke:#2563eb,color:#172554,stroke-width:3px
+    classDef external fill:#f8fafc,stroke:#64748b,color:#1f2937,stroke-width:2px,stroke-dasharray:5 5
+    class Student,Teacher person
+    class System system
+    class LLM external
